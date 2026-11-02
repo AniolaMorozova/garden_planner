@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "889337947541",
+    "project_id": "gardenplan-da4c8",
+    "storage_bucket": "gardenplan-da4c8.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:889337947541:android:914ad14fc06644155b829c",
+        "android_client_info": {
+          "package_name": "com.example.lab1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAjijYSf94jbRKBD2sJiJg-8SCzAPj25oE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../../core/router/app_routes.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_spacing.dart';
+import '../../core/widgets/current_user_builder.dart';
 import '../../core/widgets/user_avatar.dart';
-import '../../data/mock/mock_data.dart';
 
 /// тимчасовий екран для розділів, які будуть реалізовані пізніше
 class SectionPlaceholderScreen extends StatelessWidget {
@@ -30,9 +30,12 @@ class SectionPlaceholderScreen extends StatelessWidget {
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: AppSpacing.medium),
-            child: UserAvatar(
-              initials: MockData.user.initials,
-              onTap: () => Navigator.of(context).pushNamed(AppRoutes.profile),
+            child: CurrentUserBuilder(
+              builder: (context, user) => UserAvatar(
+                initials: user.initials,
+                photoUrl: user.photoUrl,
+                onTap: () => Navigator.of(context).pushNamed(AppRoutes.profile),
+              ),
             ),
           ),
         ],

@@ -1,15 +1,13 @@
-import '../models/app_user.dart';
 import '../models/garden_task.dart';
 
-/// захардкоджені дані для відображення інтерфейсу до підключення Firebase
+/// захардкоджені дані, які ще не зберігаються у cloud firestore
+/// дані користувача (імʼя, пошта, фото) тепер беруться з firebase auth
 abstract final class MockData {
-  static const AppUser user = AppUser(
-    fullName: 'Анна Морозова',
-    vocativeName: 'Анно',
-    email: 'anna.morozova@gmail.com',
-    plotsCount: 6,
-    plantsCount: 18,
-    tasksCount: 42,
+  // заглушка статистики профілю до підключення firestore
+  static const ({int plots, int plants, int tasks}) stats = (
+    plots: 6,
+    plants: 18,
+    tasks: 42,
   );
 
   // роботи на сьогодні

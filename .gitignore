@@ -46,3 +46,12 @@ app.*.map.json
 
 # Widget Preview related
 .widget_preview/
+
+# Lab 4 setup logs
+/scripts/logs/
+/report_screens/
+
+# Lab reports (?? ???????????? ?? GitHub)
+/*.docx
+/*.pdf
+

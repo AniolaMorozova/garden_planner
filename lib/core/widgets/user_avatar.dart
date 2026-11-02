@@ -2,18 +2,20 @@ import 'package:flutter/material.dart';
 
 import '../theme/app_colors.dart';
 
-/// круглий аватар з ініціалами користувача
+/// круглий аватар користувача: фото за посиланням або ініціали
 /// якщо передано [onCameraTap] — показує значок камери для зміни фото
 class UserAvatar extends StatelessWidget {
   const UserAvatar({
     super.key,
     required this.initials,
+    this.photoUrl,
     this.radius = 20,
     this.onTap,
     this.onCameraTap,
   });
 
   final String initials; // «АМ»
+  final String? photoUrl; // https-посилання на фото профілю
   final double radius; // 20 — у верхній панелі, 60 — у профілі
   final VoidCallback? onTap; // натискання на сам аватар
   final VoidCallback? onCameraTap; // натискання на значок камери
@@ -23,6 +25,14 @@ class UserAvatar extends StatelessWidget {
     Widget avatar = CircleAvatar(
       radius: radius,
       backgroundColor: AppColors.accentLight,
+      // фото малюється поверх ініціалів; якщо не завантажилось (немає мережі,
+      // бите посилання) — лишаються видимими ініціали
+      foregroundImage: (photoUrl == null || photoUrl!.isEmpty)
+          ? null
+          : NetworkImage(photoUrl!),
+      onForegroundImageError: (photoUrl == null || photoUrl!.isEmpty)
+          ? null
+          : (_, _) {},
       child: Text(
         initials,
         style: TextStyle(

@@ -9,6 +9,7 @@ class PrimaryButton extends StatelessWidget {
     super.key,
     required this.label,
     required this.onPressed,
+    this.isLoading = false,
   });
 
   final String label;
@@ -17,13 +18,17 @@ class PrimaryButton extends StatelessWidget {
   ///якщо передати null — кнопка стає неактивною (блідішою)
   final VoidCallback? onPressed;
 
+  /// поки йде запит: замість тексту індикатор, натискання заблоковане,
+  /// щоб не можна було надіслати форму вдруге
+  final bool isLoading;
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
       height: 48,
       child: FilledButton(
-        onPressed: onPressed,
+        onPressed: isLoading ? null : onPressed,
         style: FilledButton.styleFrom(
           backgroundColor: AppColors.primary,
           foregroundColor: Colors.white,
@@ -34,7 +39,15 @@ class PrimaryButton extends StatelessWidget {
           ),
           textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
         ),
-        child: Text(label),
+        child: isLoading
+            ? const SizedBox.square(
+                dimension: 22,
+                child: CircularProgressIndicator(
+                  strokeWidth: 2.5,
+                  color: Colors.white,
+                ),
+              )
+            : Text(label),
       ),
     );
   }

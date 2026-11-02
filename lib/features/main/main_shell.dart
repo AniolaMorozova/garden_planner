@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../core/di/app_dependencies.dart';
 import '../home/screens/home_screen.dart';
 import 'section_placeholder_screen.dart';
 
@@ -25,6 +26,16 @@ class _MainShellState extends State<MainShell> {
     ),
   ];
 
+  // назви вкладок для screen_view в аналітиці
+  static const List<String> _screenNames = ['home', 'plots', 'plants', 'calendar'];
+
+  void _onTabSelected(int index) {
+    if (index == _currentIndex) return;
+    setState(() => _currentIndex = index);
+    // вкладки не є окремими маршрутами, тому логуємо перегляд вручну
+    context.analytics.logScreen(_screenNames[index]);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,7 +43,7 @@ class _MainShellState extends State<MainShell> {
       body: IndexedStack(index: _currentIndex, children: _pages),
       bottomNavigationBar: NavigationBar(
         selectedIndex: _currentIndex,
-        onDestinationSelected: (index) => setState(() => _currentIndex = index),
+        onDestinationSelected: _onTabSelected,
         destinations: const [
           // icon — коли вкладка не вибрана, selectedIcon — коли вибрана.
           NavigationDestination(

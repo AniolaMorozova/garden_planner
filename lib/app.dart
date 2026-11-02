@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
+import 'core/di/app_dependencies.dart';
 import 'core/router/app_routes.dart';
 import 'core/theme/app_theme.dart';
+import 'features/auth/screens/auth_gate.dart';
 import 'features/auth/screens/forgot_password_screen.dart';
-import 'features/auth/screens/login_screen.dart';
 import 'features/auth/screens/register_screen.dart';
-import 'features/main/main_shell.dart';
 import 'features/profile/screens/change_password_screen.dart';
 import 'features/profile/screens/edit_profile_screen.dart';
 import 'features/profile/screens/profile_screen.dart';
@@ -20,13 +20,14 @@ class GardenPlanApp extends StatelessWidget {
       title: 'GardenPlan',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.light,
-      initialRoute: AppRoutes.login,
+      initialRoute: AppRoutes.root,
+      // firebase analytics відстежує переходи між іменованими маршрутами
+      navigatorObservers: context.analytics.navigatorObservers,
       // таблиця маршрутів: назва екрана -> функція яка його створює
       routes: {
-        AppRoutes.login: (_) => const LoginScreen(),
+        AppRoutes.root: (_) => const AuthGate(),
         AppRoutes.register: (_) => const RegisterScreen(),
         AppRoutes.forgotPassword: (_) => const ForgotPasswordScreen(),
-        AppRoutes.home: (_) => const MainShell(),
         AppRoutes.profile: (_) => const ProfileScreen(),
         AppRoutes.editProfile: (_) => const EditProfileScreen(),
         AppRoutes.changePassword: (_) => const ChangePasswordScreen(),
